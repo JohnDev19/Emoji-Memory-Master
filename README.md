@@ -2,6 +2,10 @@
 
 Emoji Memory Master is a memory game built with HTML, CSS, and JavaScript. Test your memory skills by matching pairs of emoji cards!
 
+![Demo 1](demo1.jpg)
+![Demo 2](demo2.jpg)
+![Demo 4](demo3.jpg)
+
 ## Features
 
 - 🎮 Interactive memory game with emojis
