@@ -33,3 +33,55 @@
                 font-size: 1.5rem;
             }
         }
+        
+        .copy-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            background: #ff4757;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .copy-alert.show {
+            transform: translateX(0);
+        }
+
+        .copy-alert i {
+            font-size: 1.25rem;
+        }
+
+        /* Icon animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .copy-alert i {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .highlight-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 71, 87, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .highlight-effect.active {
+            opacity: 1;
+        }
