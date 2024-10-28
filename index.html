@@ -60,6 +60,124 @@
             </div>
         </div>
     </div>
+    
+    <div class="copy-alert">
+        <i>⚠️</i>
+        <span class="alert-message"></span>
+    </div>
+
+        <script>
+        class CopyProtection {
+            constructor() {
+                this.alertElement = document.querySelector('.copy-alert');
+                this.alertMessage = document.querySelector('.alert-message');
+                this.protectedContent = document.querySelector('.protected-content');
+                this.alertTimeout = null;
+                this.initialize();
+            }
+
+            initialize() {
+                document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
+                
+                document.addEventListener('contextmenu', (e) => this.handleContextMenu(e));
+                
+                document.addEventListener('copy', (e) => this.handleCopy(e));
+                document.addEventListener('cut', (e) => this.handleCut(e));
+                document.addEventListener('paste', (e) => this.handlePaste(e));
+                
+                document.addEventListener('dragstart', (e) => this.handleDrag(e));
+                document.addEventListener('drop', (e) => this.handleDrop(e));
+                
+                this.protectedContent.addEventListener('mousedown', () => this.addHighlightEffect());
+            }
+
+            showAlert(message) {
+                clearTimeout(this.alertTimeout);
+                this.alertMessage.textContent = message;
+                this.alertElement.classList.add('show');
+                
+                this.alertTimeout = setTimeout(() => {
+                    this.alertElement.classList.remove('show');
+                }, 3000);
+            }
+
+            handleKeyboardShortcuts(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch (e.key.toLowerCase()) {
+                        case 'c':
+                            this.showAlert('Copying is not allowed!');
+                            e.preventDefault();
+                            break;
+                        case 'x':
+                            this.showAlert('Cutting is not allowed!');
+                            e.preventDefault();
+                            break;
+                        case 'v':
+                            this.showAlert('Pasting is not allowed!');
+                            e.preventDefault();
+                            break;
+                        case 'a':
+                            this.showAlert('Text selection is disabled!');
+                            e.preventDefault();
+                            break;
+                        case 'p':
+                            this.showAlert('Printing is disabled!');
+                            e.preventDefault();
+                            break;
+                        case 's':
+                            this.showAlert('Saving is disabled!');
+                            e.preventDefault();
+                            break;
+                    }
+                }
+            }
+
+            handleContextMenu(e) {
+                e.preventDefault();
+                this.showAlert('Right-click menu is disabled!');
+            }
+
+            handleCopy(e) {
+                e.preventDefault();
+                this.showAlert('Copying is not allowed!');
+            }
+
+            handleCut(e) {
+                e.preventDefault();
+                this.showAlert('Cutting is not allowed!');
+            }
+
+            handlePaste(e) {
+                e.preventDefault();
+                this.showAlert('Pasting is not allowed!');
+            }
+
+            handleDrag(e) {
+                e.preventDefault();
+                this.showAlert('Dragging is not allowed!');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                this.showAlert('Dropping is not allowed!');
+            }
+
+            addHighlightEffect() {
+                const highlight = document.createElement('div');
+                highlight.className = 'highlight-effect';
+                this.protectedContent.appendChild(highlight);
+                
+                setTimeout(() => highlight.classList.add('active'), 0);
+                
+                setTimeout(() => {
+                    highlight.classList.remove('active');
+                    setTimeout(() => highlight.remove(), 300);
+                }, 300);
+            }
+        }
+
+        const copyProtection = new CopyProtection();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="main.js"></script>
 </body>
